@@ -71,17 +71,21 @@ func (h *handlerTicket) CreateTicket(c echo.Context) error {
 	}
 
 	userId := c.Get("userLogin").(jwt.MapClaims)["id"].(float64)
+	parsePrice, _ := strconv.Atoi(request.Price)
+	parseQty, _ := strconv.Atoi(request.Qty)
+	parseStartStationID, _ := strconv.Atoi(request.StartStationID)
+	parseDestinationStationID, _ := strconv.Atoi(request.DestinationStationID)
 
 	ticket := models.Ticket{
 		NameTrain:            request.NameTrain,
 		TypeTrain:            request.TypeTrain,
 		StartDate:            request.StartDate,
-		StartStationID:       request.StartStationID,
+		StartStationID:       parseStartStationID,
 		StartTime:            request.StartTime,
-		DestinationStationID: request.DestinationStationID,
+		DestinationStationID: parseDestinationStationID,
 		ArrivalTime:          request.ArrivalTime,
-		Price:                request.Price,
-		Qty:                  request.Qty,
+		Price:                parsePrice,
+		Qty:                  parseQty,
 		UserID:               int(userId),
 	}
 

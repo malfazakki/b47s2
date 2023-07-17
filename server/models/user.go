@@ -9,6 +9,7 @@ type User struct {
 	Gender   string `json:"gender" gorm:"type: varchar(255)"`
 	Phone    string `json:"phone" gorm:"type: varchar(255)"`
 	Address  string `json:"address" gorm:"type: varchar(255)"`
+	Role     string `json:"role" gorm:"default: 'user'"`
 }
 
 type UserResponse struct {

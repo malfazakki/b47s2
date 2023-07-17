@@ -82,7 +82,7 @@ func (h *handlerAuth) Login(c echo.Context) error {
 
 	claims := jwt.MapClaims{}
 	claims["id"] = user.ID
-	claims["exp"] = time.Now().Add(time.Hour * 2).Unix() 
+	claims["exp"] = time.Now().Add(time.Hour * 2).Unix()
 
 	token, errGenerateToken := jwtToken.GenerateToken(&claims)
 	if errGenerateToken != nil {
@@ -92,9 +92,19 @@ func (h *handlerAuth) Login(c echo.Context) error {
 
 	loginResponse := authdto.LoginResponse{
 		Email:    user.Email,
-		Password: user.Password,
+		Username: user.Username,
 		Token:    token,
+		Role:     user.Role,
 	}
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Message: "success", Data: loginResponse})
+}
+
+func (h *handlerAuth) CheckAuth(c echo.Context) error {
+	userLogin := c.Get("userLogin")
+	userId := userLogin.(jwt.MapClaims)["id"].(float64)
+
+	user, _ := h.AuthRepository.CheckAuth(int(userId))
+
+	return c.JSON(http.StatusOK, dto.SuccessResult{Message: "success", Data: user})
 }

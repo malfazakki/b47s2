@@ -11,7 +11,7 @@ export default function NavBar() {
   const [state, dispatch] = useContext(UserContext);
   const [dropdown, setDropdown] = useState(false);
   const { user, isLogin } = state;
-  const { username, status } = user;
+  const { username, role } = user;
 
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ export default function NavBar() {
                 </h1>{" "}
                 <img src="../src/assets/images/avatar.svg" className=" cursor-pointer" />
               </div>
-              {status === "admin" ? (
+              {role === "admin" ? (
                 <div
                   id="dropdown"
                   className={` ${

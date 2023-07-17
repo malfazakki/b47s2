@@ -18,13 +18,15 @@ export default function TransactionListsAdmin({ transaction, index }) {
         <p>{no}</p>
       </div>
       <div className="flex items-center">
-        <p>{transaction.Name}</p>
+        <p>{transaction.user.full_name}</p>
       </div>
       <div className="flex items-center">
-        <p>{transaction.Ticket}</p>
+        <p>
+          {transaction.ticket.start_station.name}-{transaction.ticket.destination_station.name}
+        </p>
       </div>
       <div className="flex items-center font-medium text-orange-400 justify-center">
-        <p>{transaction.Status}</p>
+        <p>{transaction.status}</p>
       </div>
       <div className="flex items-center col-span-2 justify-center">
         <div className="flex gap-[28px]">
