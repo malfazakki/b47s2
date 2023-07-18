@@ -10,10 +10,10 @@ type TransactionRequest struct {
 }
 
 type TransactionResponse struct {
-	ID       int                   `json:"id"`
-	UserID   int                   `json:"user_id"`
-	User     models.UserResponse   `json:"user"`
-	TicketID int                   `json:"ticket_id"`
-	Ticket   models.TicketResponse `json:"ticket"`
-	Status   string                `json:"status"`
+	ID       int                       `json:"id"`
+	UserID   int                       `json:"user_id"`
+	User     models.UserTicketResponse `json:"user"`
+	TicketID int                       `json:"ticket_id"`
+	Ticket   models.TicketResponse     `json:"ticket"`
+	Status   string                    `json:"status"`
 }

@@ -62,7 +62,6 @@ export default function AddTicketAdminForm() {
       navigate("/admin");
     } catch (error) {
       console.log("add ticket failed : ", error);
-      console.log("add ticket failed : ", form);
       setMessage(alert("failed"));
     }
   });

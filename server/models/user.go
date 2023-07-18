@@ -17,7 +17,17 @@ type UserResponse struct {
 	FullName string `json:"full_name"`
 	Email    string `json:"email"`
 }
+type UserTicketResponse struct {
+	ID       int    `json:"id"`
+	FullName string `json:"full_name"`
+	Phone    string `json:"phone"`
+	Email    string `json:"email"`
+}
 
 func (UserResponse) TableName() string {
+	return "users"
+}
+
+func (UserTicketResponse) TableName() string {
 	return "users"
 }

@@ -5,7 +5,7 @@ import { useEffect, useContext, useState } from "react";
 import { setAuthToken, API } from "./config/api";
 import { UserContext } from "./context/UserContext";
 import HomePage from "./pages/HomePage";
-import MyTicketPage from "./pages/user/TicketPage";
+import MyTicketPage from "./pages/user/MyTicketPage";
 import PaymentUser from "./pages/user/PaymentUser";
 import AdminHomePage from "./pages/admin/AdminHomePage";
 import AddTicketAdmin from "./pages/admin/AddTicketAdmin";
@@ -22,6 +22,7 @@ function App() {
         navigate("/");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
     } else {
       setIsLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkUser = async () => {

@@ -11,7 +11,7 @@ export default function NavBar() {
   const [state, dispatch] = useContext(UserContext);
   const [dropdown, setDropdown] = useState(false);
   const { user, isLogin } = state;
-  const { username, role } = user;
+  const { username, role, id } = user;
 
   const navigate = useNavigate();
 

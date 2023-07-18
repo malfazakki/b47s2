@@ -1,7 +1,14 @@
-import { ticketListData } from "../../dummy_data/TicketListData";
 import TicketListDetail from "./TicketListDetail";
 
+import { API, setAuthToken } from "../../config/api";
+import { useQuery } from "react-query";
+
 export default function TicketList() {
+  setAuthToken(localStorage.token);
+  let { data: tickets, isLoading } = useQuery("ticketsCache", async () => {
+    const response = await API.get("/tickets");
+    return response.data.data;
+  });
   return (
     <>
       <div className="w-[79.7rem] mb-10 mx-auto">
@@ -26,11 +33,15 @@ export default function TicketList() {
           </div>
         </div>
       </div>
-      <div className="list">
-        {ticketListData.map((ticket) => (
-          <TicketListDetail ticket={ticket} key={ticket.id} />
-        ))}
-      </div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="list">
+          {tickets.map((ticket) => (
+            <TicketListDetail ticket={ticket} key={ticket.id} />
+          ))}
+        </div>
+      )}
     </>
   );
 }
