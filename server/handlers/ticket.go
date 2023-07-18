@@ -113,3 +113,4 @@ func convertResponseTicket(u models.Ticket) ticketdto.TicketResponse {
 		User:               u.User,
 	}
 }
+
