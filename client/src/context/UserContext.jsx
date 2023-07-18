@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { createContext, useReducer } from "react";
-
 export const UserContext = createContext();
 
 const initialState = {

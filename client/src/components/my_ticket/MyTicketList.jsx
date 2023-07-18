@@ -12,7 +12,6 @@ export default function MyTicketList({ transaction }) {
   const navigate = useNavigate();
   const payment = useContext(PaymentContext);
 
-  console.log(transaction);
   if (!transaction) {
     return null;
   }
@@ -20,7 +19,7 @@ export default function MyTicketList({ transaction }) {
   return (
     <div
       className="mx-auto w-[64.68rem] h-[21.5rem] border-[1px]  border-[#b1b1b1] grid grid-cols-[50.18rem_1fr] rounded-lg overflow-hidden bg-white cursor-pointer hover:scale-[101%] hover:ring-2 hover:ring-pink-400 transitions duration-300"
-      onClick={payment.isPaid ? () => openModal(<MyTicketDetail />) : null}
+      onClick={transaction.status ? () => openModal(<MyTicketDetail />) : null}
     >
       <div className="h-full">
         <div className=" h-[2.13rem]">
@@ -48,9 +47,9 @@ export default function MyTicketList({ transaction }) {
             </div>
             <div className="pl-[31px] pt-[32px]">
               <p className="text-xl font-semibold">{transaction.ticket?.start_station.name}</p>
-              <p className="text-sm text-gray-400">Berangkat</p>
+              <p className="text-sm text-gray-400">Keberangkatan</p>
               <p className="mt-6 text-xl font-semibold">{transaction.ticket?.destination_station.name}</p>
-              <p className="text-sm text-gray-400">{transaction.ticket?.arrival_time}</p>
+              <p className="text-sm text-gray-400">Tujuan</p>
             </div>
           </div>
           <div className="grid grid-cols-[226px_192px_187px_197px] pt-[27px] h-[61.5px] pl-[33px]">
@@ -78,6 +77,7 @@ export default function MyTicketList({ transaction }) {
             className="h-[2.5rem] w-[12.875rem] bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] rounded-lg cursor-pointer text-white font-semibold mr-[.7rem] mt-[202px]"
             onClick={(e) => {
               e.stopPropagation();
+              payment.setIdTransaction(transaction?.id);
               navigate("/payment-user");
             }}
           >

@@ -6,7 +6,7 @@ import NavBar from "../../components/NavBar";
 import { API, setAuthToken } from "../../config/api";
 import { useQuery } from "react-query";
 import { UserContext } from "../../context/UserContext";
-import { useContext, useEffect } from "react";
+import { useContext, useState } from "react";
 
 export default function MyTicketPage() {
   const [state, dispatch] = useContext(UserContext);
@@ -15,7 +15,7 @@ export default function MyTicketPage() {
 
   setAuthToken(localStorage.token);
   let { data: transactions, isLoading } = useQuery("transactionCache", async () => {
-    const response = await API.get("/transactions");
+    const response = await API.get(`/transactions`);
     return response.data.data;
   });
 
@@ -28,9 +28,8 @@ export default function MyTicketPage() {
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          transactions.map((transaction, index) => (
-            <MyTicketList transaction={transaction} key={transaction.ticket_id} />
-          ))
+          transactions &&
+          transactions.map((transaction, index) => <MyTicketList transaction={transaction} key={index} />)
         )}
         <Modal />
       </div>

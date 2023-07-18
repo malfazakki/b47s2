@@ -24,6 +24,7 @@ export default function NavBar() {
       type: "LOGOUT",
     });
     setDropdown(false);
+    navigate("/");
   };
 
   return (
