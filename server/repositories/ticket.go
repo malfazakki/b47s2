@@ -11,6 +11,7 @@ type TicketRepository interface {
 	GetTicket(ID int) (models.Ticket, error)
 	CreateTicket(ticket models.Ticket) (models.Ticket, error)
 	SearchTicket(date string, startStation string, destinationStation string) ([]models.TicketResponse, error)
+	UserTickets(UserID int) ([]models.Ticket, error)
 }
 
 func RepositoryTicket(db *gorm.DB) *repository {
@@ -20,6 +21,14 @@ func RepositoryTicket(db *gorm.DB) *repository {
 func (r *repository) FindTickets() ([]models.Ticket, error) {
 	var tickets []models.Ticket
 	err := r.db.Preload("StartStation").Preload("DestinationStation").Preload("User").Find(&tickets).Error
+
+	return tickets, err
+}
+
+func (r *repository) UserTickets(UserID int) ([]models.Ticket, error) {
+	var tickets []models.Ticket
+
+	err := r.db.Preload("StartStation").Preload("DestinationStation").Preload("User").Where("user_id = ?", UserID).Find(&tickets).Error
 
 	return tickets, err
 }

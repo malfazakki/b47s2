@@ -10,12 +10,9 @@ import { useContext, useState } from "react";
 
 export default function MyTicketPage() {
   const [state, dispatch] = useContext(UserContext);
-  const { user } = state;
-  const { id } = user;
-
   setAuthToken(localStorage.token);
   let { data: transactions, isLoading } = useQuery("transactionCache", async () => {
-    const response = await API.get(`/transactions`);
+    const response = await API.get(`/user-transactions`);
     return response.data.data;
   });
 
@@ -27,9 +24,10 @@ export default function MyTicketPage() {
         <h1 className="text-4xl w-[64.68rem] -ml-[98px]">Tiket Saya</h1>
         {isLoading ? (
           <p>Loading...</p>
-        ) : (
-          transactions &&
+        ) : transactions && transactions.length > 0 ? (
           transactions.map((transaction, index) => <MyTicketList transaction={transaction} key={index} />)
+        ) : (
+          <p>No transactions found.</p>
         )}
         <Modal />
       </div>

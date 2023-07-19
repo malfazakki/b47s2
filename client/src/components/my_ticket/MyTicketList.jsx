@@ -5,12 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/ModalContext";
 import MyTicketDetail from "../modal/MyTicketDetail";
 import { UserContext } from "../../context/UserContext";
-import { PaymentContext } from "../../context/PaymentContext";
 
 export default function MyTicketList({ transaction }) {
   const { openModal, closeModal } = useModal();
   const navigate = useNavigate();
-  const payment = useContext(PaymentContext);
 
   if (!transaction) {
     return null;
@@ -30,7 +28,7 @@ export default function MyTicketList({ transaction }) {
             <div className="pl-[35px] pt-[32px] ">
               <p className="font-bold text-lg">{transaction.ticket?.name_train}</p>
               <p className="text-sm">{transaction.ticket?.type_train}</p>
-              {payment.isPaid ? (
+              {transaction.status === "approved" ? (
                 <p className="py-1 px-3 text-sm text-green-500 inline-block bg-green-100 mt-3">Approved</p>
               ) : (
                 <p className="py-1 px-3 text-sm text-orange-500 inline-block bg-orange-100 mt-3">Pending</p>
@@ -77,8 +75,7 @@ export default function MyTicketList({ transaction }) {
             className="h-[2.5rem] w-[12.875rem] bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] rounded-lg cursor-pointer text-white font-semibold mr-[.7rem] mt-[202px]"
             onClick={(e) => {
               e.stopPropagation();
-              payment.setIdTransaction(transaction?.id);
-              navigate("/payment-user");
+              navigate(`/payment-user/${transaction?.id}`);
             }}
           >
             Bayar Sekarang

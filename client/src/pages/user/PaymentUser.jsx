@@ -1,21 +1,26 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { PaymentContext } from "../../context/PaymentContext";
+import { useParams } from "react-router-dom";
+import { API, setAuthToken } from "../../config/api";
+import { useQuery } from "react-query";
 
 import NavBar from "../../components/NavBar";
 import Modal from "../../components/modal/Modal";
 
 export default function PaymentUser() {
+  const param = useParams();
   const navigate = useNavigate();
-  const { transactions, isLoading } = useContext(PaymentContext);
-
-  const t = transactions[0];
-  console.log(t);
 
   const handlePayment = () => {
     navigate("/myticket");
   };
+
+  setAuthToken(localStorage.token);
+  let { data: t, isLoading } = useQuery("transactionCache", async () => {
+    const response = await API.get(`/transaction/${param.id}`);
+    return response.data.data;
+  });
   return (
     <>
       <NavBar />

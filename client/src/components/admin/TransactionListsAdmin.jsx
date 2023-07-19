@@ -1,12 +1,30 @@
 /* eslint-disable react/prop-types */
 import { useModal } from "../../context/ModalContext";
 import EditTicketAdmin from "./EditTicketAdmin";
+import { useMutation } from "react-query";
+import { API } from "../../config/api";
 
 import TicketDetailAdmin from "./TicketDetailAdmin";
 
-export default function TransactionListsAdmin({ transaction, index }) {
+export default function TransactionListsAdmin({ transaction, index, refetch }) {
   const { openModal } = useModal();
   const no = index + 1;
+
+  const mutation = useMutation(async (id) => {
+    try {
+      await API.delete(`/transaction/${id}`);
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  function handleDelete(id) {
+    const confirmation = window.confirm("Want to Delete? " + transaction.id + " " + transaction.user.full_name);
+    if (confirmation) {
+      mutation.mutate(id);
+    }
+  }
 
   return (
     <div
@@ -14,7 +32,7 @@ export default function TransactionListsAdmin({ transaction, index }) {
         no % 2 !== 0 ? "border-y-2 border-slate-300 bg-[#f9f9f9]" : null
       }`}
     >
-      <div className="flex items-center">
+      <div className="flex items-center ml-1">
         <p>{no}</p>
       </div>
       <div className="flex items-center">
@@ -32,7 +50,7 @@ export default function TransactionListsAdmin({ transaction, index }) {
         <div className="flex gap-[28px]">
           <img
             onClick={() => {
-              openModal(<TicketDetailAdmin />);
+              openModal(<TicketDetailAdmin id={transaction.id} />);
             }}
             src="../src/assets/images/search.svg"
             alt="search"
@@ -47,7 +65,7 @@ export default function TransactionListsAdmin({ transaction, index }) {
             className="cursor-pointer hover:scale-110"
           />
           <img
-            onClick={null}
+            onClick={() => handleDelete(transaction.id)}
             src="../src/assets/images/delete.svg"
             alt="search"
             className="cursor-pointer hover:scale-110"

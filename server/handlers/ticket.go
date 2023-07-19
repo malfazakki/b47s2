@@ -31,6 +31,17 @@ func (h *handlerTicket) FindTickets(c echo.Context) error {
 	return c.JSON(http.StatusOK, dto.SuccessResult{Message: "success", Data: tickets})
 }
 
+func (h *handlerTicket) UserTickets(c echo.Context) error {
+	userID := int(c.Get("userLogin").(jwt.MapClaims)["id"].(float64))
+
+	tickets, err := h.TicketRepository.UserTickets(userID)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
+	}
+
+	return c.JSON(http.StatusOK, dto.SuccessResult{Message: "success", Data: tickets})
+}
+
 func (h *handlerTicket) GetTicket(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
@@ -113,4 +124,3 @@ func convertResponseTicket(u models.Ticket) ticketdto.TicketResponse {
 		User:               u.User,
 	}
 }
-

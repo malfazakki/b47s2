@@ -3,7 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { UserContextProvider } from "./context/UserContext";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { PaymentContextProvider } from "./context/PaymentContext";
 import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
@@ -15,9 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <UserContextProvider>
         <QueryClientProvider client={client}>
-          <PaymentContextProvider>
             <App />
-          </PaymentContextProvider>
         </QueryClientProvider>
       </UserContextProvider>
     </BrowserRouter>

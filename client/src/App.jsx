@@ -63,7 +63,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/myticket" element={<MyTicketPage />} />
-          <Route path="/payment-user" element={<PaymentUser />} />
+          <Route path="/payment-user/:id" element={<PaymentUser />} />
           <Route path="/admin" element={<AdminHomePage />} />
           <Route path="/addticket" element={<AddTicketAdmin />} />
         </Routes>

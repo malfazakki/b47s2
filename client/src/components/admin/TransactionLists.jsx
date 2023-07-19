@@ -6,7 +6,11 @@ import Modal from "../modal/Modal";
 
 export default function TransactionLists() {
   setAuthToken(localStorage.token);
-  let { data: transactions, isLoading } = useQuery("transactionsCache", async () => {
+  let {
+    data: transactions,
+    isLoading,
+    refetch,
+  } = useQuery("transactionsCache", async () => {
     const response = await API.get("/transactions");
     return response.data.data;
   });
@@ -19,13 +23,13 @@ export default function TransactionLists() {
           <div className="flex items-center">
             <p>No</p>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center ml-3">
             <p>Users</p>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center ml-10">
             <p>Tiket</p>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center ml-3">
             <p>Status Payment</p>
           </div>
           <div className="flex items-center col-span-2 justify-center">
@@ -34,12 +38,14 @@ export default function TransactionLists() {
         </div>
         {isLoading ? (
           <p>Loading...</p>
-        ) : (
+        ) : transactions && transactions.length > 0 ? (
           transactions.map((transaction, index) => (
-            <TransactionListsAdmin transaction={transaction} key={transaction.id} index={index} />
+            <TransactionListsAdmin transaction={transaction} key={transaction.id} index={index} refetch={refetch} />
           ))
+        ) : (
+          <p>No transactions found.</p>
         )}
-        <Modal />
+        <Modal refetch={refetch} />
       </div>
     </div>
   );
