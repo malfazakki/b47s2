@@ -58,6 +58,7 @@ function App() {
       setIsLoading(false);
     }
   };
+
   return (
     <>
       {isLoading ? null : (
