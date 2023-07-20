@@ -18,7 +18,7 @@ type Ticket struct {
 }
 
 type TicketResponse struct {
-	ID                   int     `json:"-"`
+	ID                   int     `json:"id"`
 	NameTrain            string  `json:"name_train"`
 	TypeTrain            string  `json:"type_train"`
 	StartDate            string  `json:"start_date"`

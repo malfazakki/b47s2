@@ -8,15 +8,14 @@ export default function Modal({ refetch }) {
 
   if (!showModal) return null;
 
+  function handleClickModal() {
+    if (refetch) return refetch();
+    closeModal();
+  }
+
   return (
     <div className="fixed inset-0 z-30 overflow-y-auto transition-opacity">
-      <div
-        className="fixed inset-0 w-full h-full bg-black opacity-50 blur-sm"
-        onClick={() => {
-          refetch();
-          closeModal();
-        }}
-      ></div>
+      <div className="fixed inset-0 w-full h-full bg-black opacity-50 blur-sm" onClick={handleClickModal}></div>
       <div className="flex items-center h-full">{modalContent}</div>
     </div>
   );

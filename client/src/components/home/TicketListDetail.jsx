@@ -26,25 +26,33 @@ export default function TicketListDetail({ ticket }) {
     status: "pending",
   };
 
-  const handleDivClick = useMutation(async (e) => {
+  const mutationFunction = async () => {
     try {
-      e.preventDefault();
       const response = await API.post("/transaction", transaction);
-
       console.log("success make transaction", response);
-
       handleSelectTicket();
     } catch (error) {
       console.log("error catch: ", error);
       console.log("error catch: ", transaction);
     }
-  });
+  };
+
+  const handleDivClick = useMutation(mutationFunction);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (state.isLogin) {
+      handleDivClick.mutate();
+    } else {
+      handleShowLogin();
+    }
+  };
 
   return (
     <div>
       <div
         className="h-[6.25rem] w-[79.7rem] mx-auto border-2 border-slate-300 mb-[2.5rem] cursor-pointer hover:scale-[102%] transition-transform duration-700 hover:ring-2 hover:ring-pink-400 hover:border-pink-500"
-        onClick={state.isLogin ? (e) => handleDivClick.mutate(e) : handleShowLogin}
+        onClick={handleClick}
       >
         <div className="ml-[75px] mt-7">
           <div className="mb-10 grid grid-cols-[1fr_1fr_1fr_1fr_1.5fr_1.5fr]">

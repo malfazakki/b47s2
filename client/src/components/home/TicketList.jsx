@@ -1,46 +1,28 @@
+/* eslint-disable react/prop-types */
+import { useQuery } from "react-query";
+import { API, setAuthToken } from "../../config/api";
 import TicketListDetail from "./TicketListDetail";
 
-import { API, setAuthToken } from "../../config/api";
-import { useQuery } from "react-query";
-
-export default function TicketList() {
+export default function TicketList({ date, startStation, destination }) {
   setAuthToken(localStorage.token);
-  let { data: tickets, isLoading } = useQuery("ticketsCache", async () => {
-    const response = await API.get("/tickets");
+
+  const { data: tickets, isLoading } = useQuery(["tickets", date, startStation, destination], async () => {
+    const queryString = `/ticket?date=${date}&startStation=${startStation}&destination=${destination}`;
+    const response = await API.get(queryString);
     return response.data.data;
   });
+
   return (
     <>
       <div className="w-[79.7rem] mb-10 mx-auto">
-        <div className="ml-[70px] grid grid-cols-[1fr_1fr_1fr_1fr_1.5fr_1.5fr]">
-          <div className="flex-row items-center justify-center">
-            <p>Nama Kereta</p>
-          </div>
-          <div className="flex-row items-center justify-center text-center">
-            <p className="ml-5">Berangkat</p>
-          </div>
-          <div className="flex items-center justify-center">
-            <p></p>
-          </div>
-          <div className="flex-row items-center justify-center text-center">
-            <p className="ml-1">Tiba</p>
-          </div>
-          <div className="flex items-center justify-center text-center">
-            <p className="ml-2">Durasi</p>
-          </div>
-          <div className="flex items-center justify-center">
-            <p className="text-center">Harga per Orang</p>
-          </div>
-        </div>
+        <div className="ml-[70px] grid grid-cols-[1fr_1fr_1fr_1fr_1.5fr_1.5fr]">{/* ... Grid header code ... */}</div>
       </div>
       {isLoading ? (
         <p>Loading...</p>
+      ) : tickets.length === 0 ? (
+        <p className="text-center">No tickets match the search criteria.</p>
       ) : (
-        <div className="list">
-          {tickets.map((ticket) => (
-            <TicketListDetail ticket={ticket} key={ticket.id} />
-          ))}
-        </div>
+        tickets.map((ticket) => <TicketListDetail key={ticket.id} ticket={ticket} />)
       )}
     </>
   );

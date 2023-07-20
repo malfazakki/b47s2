@@ -25,7 +25,7 @@ const reducer = (state, action) => {
         user: {},
       };
     default:
-      throw new Error();
+      return state;
   }
 };
 

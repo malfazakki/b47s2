@@ -10,6 +10,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
+	github.com/midtrans/midtrans-go v1.3.6 // indirect
 	golang.org/x/time v0.3.0 // indirect
 )
 
