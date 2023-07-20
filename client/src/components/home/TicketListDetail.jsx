@@ -8,6 +8,9 @@ import { useMutation } from "react-query";
 
 import SelectTicket from "./SelectTicket";
 import Login from "../modal/Login";
+import moment from "moment";
+
+import Arrow from "../../assets/images/arrow.svg";
 
 export default function TicketListDetail({ ticket }) {
   const { openModal } = useModal();
@@ -48,10 +51,14 @@ export default function TicketListDetail({ ticket }) {
     }
   };
 
+  const startMoment = moment(ticket.start_time, "HH:mm:ss");
+  const arrivalMoment = moment(ticket.arrival_time, "HH:mm:ss");
+  const duration = moment.duration(arrivalMoment.diff(startMoment)).humanize();
+
   return (
     <div>
       <div
-        className="h-[6.25rem] w-[79.7rem] mx-auto border-2 border-slate-300 mb-[2.5rem] cursor-pointer hover:scale-[102%] transition-transform duration-700 hover:ring-2 hover:ring-pink-400 hover:border-pink-500"
+        className="h-[6.25rem] w-[79.7rem] mx-auto border-2 border-slate-300 mb-[2.5rem] cursor-pointer hover:scale-[102%] transition-transform duration-500 hover:ring-2 hover:ring-pink-400 hover:border-pink-500 hover:drop-shadow-lg hover:shadow-md"
         onClick={handleClick}
       >
         <div className="ml-[75px] mt-7">
@@ -65,14 +72,14 @@ export default function TicketListDetail({ ticket }) {
               <p className="text-slate-400 text-xs">{ticket.start_station.name}</p>
             </div>
             <div className="flex items-center justify-center">
-              <p>➡️</p>
+              <img src={Arrow} alt="arrow" />
             </div>
             <div className="flex-row items-center justify-center text-center">
               <p className="font-bold">{ticket.arrival_time}</p>
               <p className="text-slate-400 text-xs">{ticket.destination_station.name}</p>
             </div>
             <div className="flex items-center justify-center text-center">
-              <p className="font-bold">{ticket.duration}</p>
+              <p className="font-bold">{duration}</p>
             </div>
             <div className="flex items-center justify-center">
               <p className="text-center font-bold text-pink-500">Rp. {ticket.price}</p>

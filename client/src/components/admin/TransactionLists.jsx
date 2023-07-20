@@ -43,7 +43,9 @@ export default function TransactionLists() {
             <TransactionListsAdmin transaction={transaction} key={transaction.id} index={index} refetch={refetch} />
           ))
         ) : (
-          <p>No transactions found.</p>
+          <div className="flex justify-center">
+            <p>No transactions found.</p>
+          </div>
         )}
         <Modal refetch={refetch} />
       </div>

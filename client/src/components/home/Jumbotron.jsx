@@ -1,3 +1,7 @@
+// Assets
+import Portal1 from "../../assets/images/portal-1.png";
+import Portal2 from "../../assets/images/portal-2.png";
+
 export default function Jumbotron() {
   return (
     <div className="h-[18.75rem] bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] flex-shrink-0">
@@ -8,8 +12,8 @@ export default function Jumbotron() {
           <p className="text-white ml-2 text-2xl font-light">Masuk atau Daftar Sekarang!!</p>
         </div>
         <div className="flex flex-wrap justify-end relative mr-14 -mt-7 flex-shrink-0">
-          <img src="../src/assets/images/portal-2.png" alt="ads" className="min-w-[31.25rem]" />
-          <img src="../src/assets/images/portal-1.png" alt="ads" className="absolute -top-2 -left-4 min-w-[31.25rem]" />
+          <img src={Portal2} alt="ads" className="min-w-[31.25rem]" />
+          <img src={Portal1} alt="ads" className="absolute -top-2 -left-4 min-w-[31.25rem]" />
         </div>
       </div>
     </div>

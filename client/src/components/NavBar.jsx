@@ -3,8 +3,17 @@ import React, { useContext, useState } from "react";
 import { useModal } from "../context/ModalContext";
 import { UserContext } from "../context/UserContext";
 import { useNavigate, Link } from "react-router-dom";
+
+// Component
 import Login from "./modal/Login";
 import Register from "./modal/Register";
+
+// Assets
+import Avatar from "../assets/images/avatar.svg";
+import AddTicket from "../assets/images/add-ticket.svg";
+import Logo from "../assets/images/logo.svg";
+import MyTicket from "../assets/images/my_ticket.svg";
+import Payment from "../assets/images/payment.svg";
 
 export default function NavBar() {
   const { openModal } = useModal();
@@ -49,7 +58,7 @@ export default function NavBar() {
                 <h1 className="text-xl leading-normal bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] rounded-md text-transparent bg-clip-text font-bold cursor-pointer select-none capitalize">
                   {username}
                 </h1>{" "}
-                <img src="../src/assets/images/avatar.svg" className=" cursor-pointer" />
+                <img src={Avatar} className=" cursor-pointer" />
               </div>
               {role === "admin" ? (
                 <div
@@ -61,13 +70,13 @@ export default function NavBar() {
                   <ul className="py-2 text-sm text-gray-700">
                     <li>
                       <Link to="/addticket" className="flex items-center gap-3 py-2 hover:bg-gray-100  px-6">
-                        <img src="../src/assets/images/add-ticket.svg" alt="" className=" scale-75" />{" "}
+                        <img src={AddTicket} alt="" className=" scale-75" />{" "}
                         <span className="text-pink-400 text-lg font-semibold">Add Ticket</span>
                       </Link>
                     </li>
                     <li className="border-t-4 border-pink-300" onClick={logout}>
                       <Link className="flex items-center gap-3 py-2 hover:bg-gray-100 px-6">
-                        <img src="../src/assets/images/logo.svg" className="scale-75" alt="" />{" "}
+                        <img src={Logo} className="scale-75" alt="" />{" "}
                         <span className="text-pink-400 text-lg font-semibold">Logout</span>
                       </Link>
                     </li>
@@ -83,19 +92,19 @@ export default function NavBar() {
                   <ul className="py-2 text-sm text-gray-700">
                     <li>
                       <Link to="/myticket" className="flex items-center gap-3 py-2 hover:bg-gray-100  px-6">
-                        <img src="../src/assets/images/my_ticket.svg" alt="" />{" "}
+                        <img src={MyTicket} alt="" />{" "}
                         <span className="text-pink-400 text-lg font-semibold">My Ticket</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/payment-user" className="flex items-center gap-3 py-2 hover:bg-gray-100 px-6 pb-3">
-                        <img src="../src/assets/images/payment.svg" alt="" />{" "}
+                      <Link to="/myticket" className="flex items-center gap-3 py-2 hover:bg-gray-100 px-6 pb-3">
+                        <img src={Payment} alt="" />{" "}
                         <span className="text-pink-400 text-lg font-semibold">Payment</span>
                       </Link>
                     </li>
                     <li className="border-t-4 border-pink-300" onClick={logout}>
                       <Link className="flex items-center gap-3 py-2 hover:bg-gray-100 px-6">
-                        <img src="../src/assets/images/logo.svg" className="scale-75" alt="" />{" "}
+                        <img src={Logo} className="scale-75" alt="" />{" "}
                         <span className="text-pink-400 text-lg font-semibold">Logout</span>
                       </Link>
                     </li>

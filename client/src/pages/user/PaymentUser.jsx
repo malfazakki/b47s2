@@ -7,6 +7,13 @@ import { useQuery } from "react-query";
 
 import NavBar from "../../components/NavBar";
 import Modal from "../../components/modal/Modal";
+import FormatDate from "../../components/FormatDateUtility";
+
+// Assets
+import Error from "../../assets/images/error.svg";
+import QRCode from "../../assets/images/qr-code.svg";
+import QRCodePayment from "../../assets/images/qr-code-payment.svg";
+import EllipseHubLarge from "../../assets/images/ellipse-hub-large.svg";
 
 export default function PaymentUser() {
   const param = useParams();
@@ -35,7 +42,7 @@ export default function PaymentUser() {
             <div className="grid grid-rows-[154px_160px] gap-[24px]">
               <div className=" border-[1px] rounded-md border-[#bbb] bg-[#eee] flex gap-[44px] pl-[38px] items-center">
                 <div>
-                  <img src="../../src/assets/images/error.svg" alt="error-svg" />
+                  <img src={Error} alt="error-svg" />
                 </div>
                 <div className="w-[626px] h-[100px] flex flex-col justify-between">
                   <p className="text-lg">
@@ -95,7 +102,7 @@ export default function PaymentUser() {
                   </button>
                 </div>
                 <div className="flex justify-center items-center p-16">
-                  <img src="../../src/assets/images/qr-code.svg" alt="qr-code" className="scale-125 ml-20 -mt-4" />
+                  <img src={QRCode} alt="qr-code" className="scale-125 ml-20 -mt-4" />
                 </div>
               </div>
             </div>
@@ -104,11 +111,11 @@ export default function PaymentUser() {
                 <div className="pl-[36px] pt-[21px]">
                   <p className="font-bold text-4xl ">Kereta Api</p>
                   <p className="text-[#878787] mt-1">
-                    <span className="font-bold">Saturday</span>, 21 Februari 2020
+                    <b>{FormatDate(t.ticket?.start_date).Day}</b>, {FormatDate(t.ticket?.start_date).formattedDate}
                   </p>
                 </div>
                 <div className="mr-[36px] mt-[18px]">
-                  <img src="../src/assets/images/qr-code-payment.svg" alt="qr-code" className="h-[78]" />
+                  <img src={QRCodePayment} alt="qr-code" className="h-[78]" />
                 </div>
               </div>
               <div className="h-[299px] bg-[#f5f5f5] w-full">
@@ -118,13 +125,13 @@ export default function PaymentUser() {
                 </div>
                 <div className="grid grid-cols-[92px_144px_211px]">
                   <div className="pl-[51px] pt-[18px]">
-                    <img src="../src/assets/images/ellipse-hub-large.svg" alt="ellipse-hub" />
+                    <img src={EllipseHubLarge} alt="ellipse-hub" />
                   </div>
                   <div>
                     <p className="text-lg font-semibold">{t?.ticket?.start_time}</p>
-                    <p className="text-sm text-gray-400">{t?.ticket?.start_date}</p>
+                    <p className="text-sm text-gray-400">{FormatDate(t.ticket?.start_date).formattedDate}</p>
                     <p className="text-lg font-semibold mt-[71px]">{t?.ticket?.arrival_time}</p>
-                    <p className="text-sm text-gray-400">{t?.ticket?.start_date}</p>
+                    <p className="text-sm text-gray-400">{FormatDate(t.ticket?.start_date).formattedDate}</p>
                   </div>
                   <div className="pl-[32px]">
                     <p className="text-lg font-semibold uppercase">{t?.ticket?.start_station?.name}</p>

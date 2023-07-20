@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/ModalContext";
 import MyTicketDetail from "../modal/MyTicketDetail";
 import { UserContext } from "../../context/UserContext";
+import FormatDate from "../FormatDateUtility";
+
+// Assets
+import EllipseHub from "../../assets/images/ellipse-hub.svg";
 
 export default function MyTicketList({ transaction }) {
   const { openModal, closeModal } = useModal();
@@ -16,8 +20,8 @@ export default function MyTicketList({ transaction }) {
 
   return (
     <div
-      className="mx-auto w-[64.68rem] h-[21.5rem] border-[1px]  border-[#b1b1b1] grid grid-cols-[50.18rem_1fr] rounded-lg overflow-hidden bg-white cursor-pointer hover:scale-[101%] hover:ring-2 hover:ring-pink-400 transitions duration-300"
-      onClick={transaction.status ? () => openModal(<MyTicketDetail transaction={transaction} />) : null}
+      className="mx-auto w-[64.68rem] h-[21.5rem] border-[1px]  border-[#b1b1b1] grid grid-cols-[50.18rem_1fr] rounded-lg overflow-hidden bg-white cursor-pointer scale-[98%] hover:scale-[99%] hover:ring-2 hover:ring-pink-400 hover:shadow-xl transitions duration-200"
+      onClick={transaction.status === "approved" ? () => openModal(<MyTicketDetail transaction={transaction} />) : null}
     >
       <div className="h-full">
         <div className=" h-[2.13rem]">
@@ -35,13 +39,13 @@ export default function MyTicketList({ transaction }) {
               )}
             </div>
             <div className="flex items-center">
-              <img src="../../src/assets/images/ellipse-hub.svg" alt="" />
+              <img src={EllipseHub} alt="" />
             </div>
             <div className="pl-[10px] pt-[32px]">
               <p className="text-xl font-semibold">{transaction.ticket?.start_time}</p>
-              <p className="text-sm text-gray-400">{transaction.ticket?.start_date}</p>
+              <p className="text-sm text-gray-400">{FormatDate(transaction.ticket?.start_date).formattedDate}</p>
               <p className="mt-6 text-xl font-semibold">{transaction.ticket?.arrival_time}</p>
-              <p className="text-sm text-gray-400">{transaction.ticket?.start_date}</p>
+              <p className="text-sm text-gray-400">{FormatDate(transaction.ticket?.start_date).formattedDate}</p>
             </div>
             <div className="pl-[31px] pt-[32px]">
               <p className="text-xl font-semibold">{transaction.ticket?.start_station.name}</p>
@@ -68,7 +72,8 @@ export default function MyTicketList({ transaction }) {
       <div className="h-full">
         <p className="text-right font-bold text-4xl mt-[.5rem] mr-[.94rem]">Kereta Api</p>
         <p className="text-right text-[#878787] mr-[.94rem]">
-          <span className="font-bold">Saturday</span>, 21 February 2020
+          <span className="font-bold">{FormatDate(transaction.ticket?.start_date).Day}</span>,{" "}
+          {FormatDate(transaction.ticket?.start_date).formattedDate}
         </p>
         <div className="flex justify-end">
           <button

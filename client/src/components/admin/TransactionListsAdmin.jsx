@@ -6,6 +6,11 @@ import { API } from "../../config/api";
 
 import TicketDetailAdmin from "./TicketDetailAdmin";
 
+// Assets
+import Search from "../../assets/images/search.svg";
+import Edit from "../../assets/images/edit.svg";
+import Delete from "../../assets/images/delete.svg";
+
 export default function TransactionListsAdmin({ transaction, index, refetch }) {
   const { openModal } = useModal();
   const no = index + 1;
@@ -52,7 +57,7 @@ export default function TransactionListsAdmin({ transaction, index, refetch }) {
             onClick={() => {
               openModal(<TicketDetailAdmin id={transaction.id} />);
             }}
-            src="../src/assets/images/search.svg"
+            src={Search}
             alt="search"
             className="cursor-pointer hover:scale-110"
           />
@@ -60,13 +65,13 @@ export default function TransactionListsAdmin({ transaction, index, refetch }) {
             onClick={() => {
               openModal(<EditTicketAdmin />);
             }}
-            src="../src/assets/images/edit.svg"
+            src={Edit}
             alt="search"
             className="cursor-pointer hover:scale-110"
           />
           <img
             onClick={() => handleDelete(transaction.id)}
-            src="../src/assets/images/delete.svg"
+            src={Delete}
             alt="search"
             className="cursor-pointer hover:scale-110"
           />

@@ -2,6 +2,12 @@
 import { API, setAuthToken } from "../../config/api";
 import { useQuery } from "react-query";
 
+import FormatDate from "../FormatDateUtility";
+
+// Assets
+import EllipseHubLarge from "../../assets/images/ellipse-hub-large.svg";
+import QRCode from "../../assets/images/qr-code.svg";
+
 export default function TicketDetailAdmin({ id }) {
   setAuthToken(localStorage.token);
   let { data: transaction, isLoading } = useQuery("transactionsCache", async () => {
@@ -30,19 +36,20 @@ export default function TicketDetailAdmin({ id }) {
               <div className="h-full pl-[54px] pt-[32px]">
                 <p className="text-left font-bold text-4xl mt-[.5rem] mr-[.94rem]">Kereta Api</p>
                 <p className="text-left text-[#878787] mr-[.94rem]">
-                  <span className="font-bold">Saturday</span>, 21 February 2020
+                  <span className="font-bold">{FormatDate(transaction.ticket?.start_date).Day}</span>,{" "}
+                  {FormatDate(transaction.ticket?.start_date).formattedDate}
                 </p>
                 <p className="font-bold text-2xl mt-[37px]">{transaction?.ticket?.name_train}</p>
                 <p className="text-sm">{transaction?.ticket?.type_train}</p>
                 <div className="flex mt-[17px]">
                   <div className="flex items-center mr-[25px] ">
-                    <img src="../src/assets/images/ellipse-hub-large.svg" alt="" />
+                    <img src={EllipseHubLarge} alt="" />
                   </div>
                   <div className="pl-[10px]">
                     <p className="text-lg font-semibold">{transaction?.ticket?.start_time}</p>
-                    <p className="text-sm text-gray-400">{transaction?.ticket?.start_date}</p>
+                    <p className="text-sm text-gray-400">{FormatDate(transaction.ticket?.start_date).formattedDate}</p>
                     <p className="text-lg font-semibold mt-[71px]">{transaction?.ticket?.arrival_time}</p>
-                    <p className="text-sm text-gray-400">{transaction?.ticket?.start_date}</p>
+                    <p className="text-sm text-gray-400">{FormatDate(transaction.ticket?.start_date).formattedDate}</p>
                   </div>
                   <div className="pl-[31px] ml-[74px]">
                     <p className="text-lg font-semibold">{transaction?.ticket?.start_station?.name}</p>
@@ -53,7 +60,7 @@ export default function TicketDetailAdmin({ id }) {
                 </div>
               </div>
               <div className="flex justify-end pr-[82px] pt-[36px]">
-                <img src="../src/assets/images/qr-code.svg" alt="qr-code" className="h-[250px]" />
+                <img src={QRCode} alt="qr-code" className="h-[250px]" />
               </div>
             </div>
             <div className="h-[89px] w-[95%] gap-7 mx-auto px-5 border-y-2 border-slate-700 ">

@@ -9,8 +9,8 @@ export default function Modal({ refetch }) {
   if (!showModal) return null;
 
   function handleClickModal() {
-    if (refetch) return refetch();
     closeModal();
+    if (refetch) return refetch();
   }
 
   return (
