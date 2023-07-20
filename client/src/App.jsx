@@ -9,6 +9,7 @@ import MyTicketPage from "./pages/user/MyTicketPage";
 import PaymentUser from "./pages/user/PaymentUser";
 import AdminHomePage from "./pages/admin/AdminHomePage";
 import AddTicketAdmin from "./pages/admin/AddTicketAdmin";
+import { PrivateRouteLogin, PrivateRouteUser, PrivateRouteAdmin } from "./components/PrivateRoutes";
 
 function App() {
   const navigate = useNavigate();
@@ -59,15 +60,23 @@ function App() {
   };
   return (
     <>
-      <ModalProvider>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/myticket" element={<MyTicketPage />} />
-          <Route path="/payment-user/:id" element={<PaymentUser />} />
-          <Route path="/admin" element={<AdminHomePage />} />
-          <Route path="/addticket" element={<AddTicketAdmin />} />
-        </Routes>
-      </ModalProvider>
+      {isLoading ? null : (
+        <ModalProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route element={<PrivateRouteLogin />}>
+              <Route element={<PrivateRouteUser />}>
+                <Route path="/myticket" element={<MyTicketPage />} />
+                <Route path="/payment-user/:id" element={<PaymentUser />} />
+              </Route>
+              <Route element={<PrivateRouteAdmin />}>
+                <Route path="/admin" element={<AdminHomePage />} />
+                <Route path="/addticket" element={<AddTicketAdmin />} />
+              </Route>
+            </Route>
+          </Routes>
+        </ModalProvider>
+      )}
     </>
   );
 }
