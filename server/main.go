@@ -5,6 +5,7 @@ import (
 	"landtick/database"
 	"landtick/pkg/mysql"
 	"landtick/routes"
+	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -30,6 +31,11 @@ func main() {
 
 	routes.RouteInit(e.Group("/api/v1"))
 
+	var PORT = os.Getenv("PORT")
+	if PORT == "" {
+		PORT = "5000"
+	}
+
 	fmt.Println("server running localhost:5000")
-	e.Logger.Fatal(e.Start(":5000"))
+	e.Logger.Fatal(e.Start(":" + PORT))
 }
