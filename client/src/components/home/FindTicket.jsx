@@ -71,7 +71,7 @@ export default function FindTicket({ onSearch }) {
           </div>
           <div>
             <div className="">
-              <p className="font-bold mb-1 ">Asal</p>
+              <p className="font-bold mb-1 ">Tujuan</p>
               <select
                 type="text"
                 value={destination}
