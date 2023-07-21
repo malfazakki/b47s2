@@ -11,13 +11,13 @@ import { useContext, useState } from "react";
 export default function PaymentPage() {
   const [state, dispatch] = useContext(UserContext);
   setAuthToken(localStorage.token);
-  const { data: transactions, isLoading } = useQuery("transactionCache", async () => {
+  const { data: transactions, isLoading } = useQuery("transactionPaymentCache", async () => {
     const response = await API.get(`/user-transactions`);
     return response.data.data;
   });
 
   // Handle pendingTransactions when transactions is undefined or loading
-  const pendingTransactions = transactions?.filter((transaction) => transaction.status == "pending");
+  const pendingTransactions = transactions?.filter((element) => element.status == "pending");
 
   return (
     <>

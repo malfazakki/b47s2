@@ -11,15 +11,14 @@ import { useContext, useState } from "react";
 export default function MyTicketPage() {
   const [state, dispatch] = useContext(UserContext);
   setAuthToken(localStorage.token);
-  let { data: transactions, isLoading } = useQuery("transactionCache", async () => {
+  let { data: transactions, isLoading } = useQuery("transactionMyTicketCache", async () => {
     const response = await API.get(`/user-transactions`);
     return response.data.data;
   });
 
   let approvedTransactions;
 
-  approvedTransactions = transactions?.filter((transaction) => transaction.status == "approved");
-
+  approvedTransactions = transactions?.filter((element) => element.status == "approved");
   return (
     <>
       <NavBar />
