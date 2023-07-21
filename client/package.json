@@ -32,11 +32,5 @@
     "postcss": "^8.4.26",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.0"
-  },
-  "rewrites": [
-    {
-      "source": "(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  }
 }

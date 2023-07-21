@@ -1,9 +1,8 @@
 {
   "rewrites": [
-    { "source": "/myticket", "destination": "/myticket" },
-    { "source": "/payment", "destination": "/payment" },
-    { "source": "/payment-user/:id", "destination": "/payment-user/:id" },
-    { "source": "/admin", "destination": "/admin" },
-    { "source": "/addticket", "destination": "/addticket" }
+    {
+      "source": "(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
