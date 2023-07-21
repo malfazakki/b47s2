@@ -17,7 +17,7 @@ export default function MyTicketPage() {
   });
 
   const approvedTransactions =
-    isLoading || !transactions ? [] : transactions?.filter((transaction) => transaction.status === "approved");
+    isLoading && !transactions ? [] : transactions?.filter((transaction) => transaction.status === "approved");
 
   return (
     <>

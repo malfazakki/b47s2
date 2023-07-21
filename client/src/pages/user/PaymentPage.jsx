@@ -18,7 +18,7 @@ export default function PaymentPage() {
 
   // Handle pendingTransactions when transactions is undefined or loading
   const pendingTransactions =
-    isLoading || !transactions ? [] : transactions?.filter((transaction) => transaction.status === "pending");
+    isLoading && !transactions ? [] : transactions?.filter((transaction) => transaction.status === "pending");
 
   return (
     <>
