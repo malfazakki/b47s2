@@ -4,11 +4,11 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/ModalContext";
 import MyTicketDetail from "../modal/MyTicketDetail";
-import { UserContext } from "../../context/UserContext";
 import FormatDate from "../FormatDateUtility";
 
 // Assets
 import EllipseHub from "../../assets/images/ellipse-hub.svg";
+import QRCodeMyTicketDetail from "../../assets/images/qr-code-myticketdetail.svg";
 
 export default function MyTicketList({ transaction }) {
   const { openModal, closeModal } = useModal();
@@ -76,15 +76,19 @@ export default function MyTicketList({ transaction }) {
           {FormatDate(transaction.ticket?.start_date).formattedDate}
         </p>
         <div className="flex justify-end">
-          <button
-            className="h-[2.5rem] w-[12.875rem] bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] rounded-lg cursor-pointer text-white font-semibold mr-[.7rem] mt-[202px]"
-            onClick={(e) => {
-              e.stopPropagation();
-              navigate(`/payment-user/${transaction?.id}`);
-            }}
-          >
-            Bayar Sekarang
-          </button>
+          {transaction.status === "pending" ? (
+            <button
+              className="h-[2.5rem] w-[12.875rem] bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] rounded-lg cursor-pointer text-white font-semibold mr-[.7rem] mt-[202px]"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/payment-user/${transaction?.id}`);
+              }}
+            >
+              Bayar Sekarang
+            </button>
+          ) : (
+            <img src={QRCodeMyTicketDetail} alt="qr-code" className="h-[180px] mr-9 mt-10" />
+          )}
         </div>
       </div>
     </div>

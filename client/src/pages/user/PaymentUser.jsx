@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { API, setAuthToken } from "../../config/api";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 
 import NavBar from "../../components/NavBar";
 import Modal from "../../components/modal/Modal";
@@ -19,14 +19,69 @@ export default function PaymentUser() {
   const param = useParams();
   const navigate = useNavigate();
 
-  const handlePayment = () => {
-    navigate("/myticket");
-  };
-
   setAuthToken(localStorage.token);
   let { data: t, isLoading } = useQuery("transactionCache", async () => {
     const response = await API.get(`/transaction/${param.id}`);
     return response.data.data;
+  });
+
+  useEffect(() => {
+    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+    const myMidtransClientKey = import.meta.env.VITE_MIDTRANS_CLIENT_KEY;
+
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransScriptUrl;
+    scriptTag.setAttribute("data-client-key", myMidtransClientKey);
+
+    document.body.appendChild(scriptTag);
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
+
+  const handleBuy = useMutation(async (e) => {
+    try {
+      e.preventDefault();
+
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const data = {
+        id: param.id,
+        full_name: t.user.full_name,
+        email: t.user.email,
+        price: t.ticket.price,
+      };
+      const body = JSON.stringify(data);
+
+      const response = await API.post("/transaction/midtrans", body, config);
+      console.log("transaction success :", response);
+
+      // code here
+      const token = response.data.data.token;
+      window.snap.pay(token, {
+        onSuccess: function (result) {
+          console.log(result);
+          navigate("/myticket");
+        },
+        onPending: function (result) {
+          console.log(result);
+          navigate("/myticket");
+        },
+        onError: function (result) {
+          console.log(result);
+          navigate("/myticket");
+        },
+        onClose: function () {
+          alert("You closed the popup without finishing the payment!");
+        },
+      });
+    } catch (error) {
+      console.log("transaction failed : ", error);
+    }
   });
   return (
     <>
@@ -96,7 +151,7 @@ export default function PaymentUser() {
                   </div>
                   <button
                     className="w-[446px] py-2 bg-gradient-to-r from-[#ec7ab7] to-[#ec7a7a] text-white font-semibold hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] duration-300 mt-[21px] rounded-lg"
-                    onClick={handlePayment}
+                    onClick={(e) => handleBuy.mutate(e)}
                   >
                     Bayar Sekarang
                   </button>

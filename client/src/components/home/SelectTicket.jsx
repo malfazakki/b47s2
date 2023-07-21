@@ -7,10 +7,7 @@ export default function SelectTicket() {
       <p className="text-center">Tiket anda berhasil ditambahkan silahkan segera melakukan pembayaran</p>
       <p className="text-center">
         Klik{" "}
-        <span
-          className="font-bold cursor-pointer hover:text-pink-500 text-center"
-          onClick={() => navigate("/myticket")}
-        >
+        <span className="font-bold cursor-pointer hover:text-pink-500 text-center" onClick={() => navigate("/payment")}>
           Disini
         </span>
       </p>

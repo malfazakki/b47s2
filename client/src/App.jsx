@@ -9,6 +9,7 @@ import MyTicketPage from "./pages/user/MyTicketPage";
 import PaymentUser from "./pages/user/PaymentUser";
 import AdminHomePage from "./pages/admin/AdminHomePage";
 import AddTicketAdmin from "./pages/admin/AddTicketAdmin";
+import PaymentPage from "./pages/user/PaymentPage";
 import { PrivateRouteLogin, PrivateRouteUser, PrivateRouteAdmin } from "./components/PrivateRoutes";
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
             <Route element={<PrivateRouteLogin />}>
               <Route element={<PrivateRouteUser />}>
                 <Route path="/myticket" element={<MyTicketPage />} />
+                <Route path="/payment" element={<PaymentPage />} />
                 <Route path="/payment-user/:id" element={<PaymentUser />} />
               </Route>
               <Route element={<PrivateRouteAdmin />}>

@@ -97,7 +97,7 @@ export default function NavBar() {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/myticket" className="flex items-center gap-3 py-2 hover:bg-gray-100 px-6 pb-3">
+                      <Link to="/payment" className="flex items-center gap-3 py-2 hover:bg-gray-100 px-6 pb-3">
                         <img src={Payment} alt="" />{" "}
                         <span className="text-pink-400 text-lg font-semibold">Payment</span>
                       </Link>

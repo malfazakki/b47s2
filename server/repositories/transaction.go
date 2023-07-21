@@ -12,6 +12,7 @@ type TransactionRepository interface {
 	CreateTransaction(transaction models.Transaction) (models.Transaction, error)
 	UserTransactions(UserID int) ([]models.Transaction, error)
 	DeleteTransaction(transaction models.Transaction, ID int) (models.Transaction, error)
+	UpdateTransaction(status string, orderID int) (models.Transaction, error)
 }
 
 func RepositoryTransaction(db *gorm.DB) *repository {
@@ -49,5 +50,14 @@ func (r *repository) CreateTransaction(transaction models.Transaction) (models.T
 func (r *repository) DeleteTransaction(transaction models.Transaction, ID int) (models.Transaction, error) {
 	err := r.db.Delete(&transaction, ID).Scan(&transaction).Error
 
+	return transaction, err
+}
+
+func (r *repository) UpdateTransaction(status string, orderID int) (models.Transaction, error) {
+	var transaction models.Transaction
+	r.db.First(&transaction, orderID)
+
+	transaction.Status = status
+	err := r.db.Save(&transaction).Error
 	return transaction, err
 }

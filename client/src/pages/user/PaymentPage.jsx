@@ -8,16 +8,17 @@ import { useQuery } from "react-query";
 import { UserContext } from "../../context/UserContext";
 import { useContext, useState } from "react";
 
-export default function MyTicketPage() {
+export default function PaymentPage() {
   const [state, dispatch] = useContext(UserContext);
   setAuthToken(localStorage.token);
-  let { data: transactions, isLoading } = useQuery("transactionCache", async () => {
+  const { data: transactions, isLoading } = useQuery("transactionCache", async () => {
     const response = await API.get(`/user-transactions`);
     return response.data.data;
   });
 
-  const approvedTransactions =
-    isLoading || !transactions ? [] : transactions.filter((transaction) => transaction.status === "approved");
+  // Handle pendingTransactions when transactions is undefined or loading
+  const pendingTransactions =
+    isLoading || !transactions ? [] : transactions.filter((transaction) => transaction.status === "pending");
 
   return (
     <>
@@ -27,10 +28,10 @@ export default function MyTicketPage() {
         <h1 className="text-4xl w-[64.68rem] -ml-[98px]">Tiket Saya</h1>
         {isLoading ? (
           <p>Loading...</p>
-        ) : approvedTransactions.length > 0 ? (
-          approvedTransactions.map((transaction, index) => <MyTicketList transaction={transaction} key={index} />)
+        ) : pendingTransactions.length > 0 ? (
+          pendingTransactions.map((transaction) => <MyTicketList transaction={transaction} key={transaction.id} />)
         ) : (
-          <p>No transactions found.</p>
+          <p>No pending transactions found.</p>
         )}
         <Modal />
       </div>
