@@ -18,7 +18,7 @@ export default function PaymentPage() {
 
   // Handle pendingTransactions when transactions is undefined or loading
   const pendingTransactions =
-    isLoading || !transactions ? [] : transactions.filter((transaction) => transaction.status === "pending");
+    isLoading || !transactions ? [] : transactions?.filter((transaction) => transaction.status === "pending");
 
   return (
     <>
@@ -28,8 +28,8 @@ export default function PaymentPage() {
         <h1 className="text-4xl w-[64.68rem] -ml-[98px]">Tiket Saya</h1>
         {isLoading ? (
           <p>Loading...</p>
-        ) : pendingTransactions.length > 0 ? (
-          pendingTransactions.map((transaction) => <MyTicketList transaction={transaction} key={transaction.id} />)
+        ) : pendingTransactions?.length > 0 ? (
+          pendingTransactions?.map((transaction) => <MyTicketList transaction={transaction} key={transaction.id} />)
         ) : (
           <p>No pending transactions found.</p>
         )}

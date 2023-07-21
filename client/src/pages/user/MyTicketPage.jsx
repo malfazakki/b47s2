@@ -17,7 +17,7 @@ export default function MyTicketPage() {
   });
 
   const approvedTransactions =
-    isLoading || !transactions ? [] : transactions.filter((transaction) => transaction.status === "approved");
+    isLoading || !transactions ? [] : transactions?.filter((transaction) => transaction.status === "approved");
 
   return (
     <>
@@ -27,8 +27,8 @@ export default function MyTicketPage() {
         <h1 className="text-4xl w-[64.68rem] -ml-[98px]">Tiket Saya</h1>
         {isLoading ? (
           <p>Loading...</p>
-        ) : approvedTransactions.length > 0 ? (
-          approvedTransactions.map((transaction, index) => <MyTicketList transaction={transaction} key={index} />)
+        ) : approvedTransactions?.length > 0 ? (
+          approvedTransactions?.map((transaction, index) => <MyTicketList transaction={transaction} key={index} />)
         ) : (
           <p>No transactions found.</p>
         )}
