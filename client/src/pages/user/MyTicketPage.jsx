@@ -18,22 +18,17 @@ export default function MyTicketPage() {
 
   let approvedTransactions;
 
-  if (isLoading == false) {
-    approvedTransactions = transactions?.filter((transaction) => transaction.status === "approved");
-  }
+  approvedTransactions = transactions?.filter((transaction) => transaction.status == "approved");
+
   return (
     <>
       <NavBar />
 
       <div className="flex flex-col justify-center items-center gap-20 mb-20 mt-20">
         <h1 className="text-4xl w-[64.68rem] -ml-[98px]">Tiket Saya</h1>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : approvedTransactions?.length > 0 ? (
-          approvedTransactions?.map((transaction, index) => <MyTicketList transaction={transaction} key={index} />)
-        ) : (
-          <p>No transactions found.</p>
-        )}
+        {approvedTransactions?.map((transaction, index) => (
+          <MyTicketList transaction={transaction} key={index} />
+        ))}
         <Modal />
       </div>
     </>
