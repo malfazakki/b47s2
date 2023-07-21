@@ -24,7 +24,7 @@ export default function PaymentPage() {
       <NavBar />
 
       <div className="flex flex-col justify-center items-center gap-20 mb-20 mt-20">
-        <h1 className="text-4xl w-[64.68rem] -ml-[98px]">Tiket Saya</h1>
+        <h1 className="text-4xl w-[64.68rem] -ml-[98px]">Pending Ticket</h1>
         {pendingTransactions?.map((transaction, index) => (
           <MyTicketList transaction={transaction} key={index} />
         ))}
