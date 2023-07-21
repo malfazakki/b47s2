@@ -32,5 +32,27 @@
     "postcss": "^8.4.26",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.0"
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/myticket",
+      "destination": "/myticket"
+    },
+    {
+      "source": "/payment",
+      "destination": "/payment"
+    },
+    {
+      "source": "/payment-user/:id",
+      "destination": "/payment-user/:id"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin"
+    },
+    {
+      "source": "/addticket",
+      "destination": "/addticket"
+    }
+  ]
 }
