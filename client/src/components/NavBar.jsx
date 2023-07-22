@@ -37,11 +37,11 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="bg-white h-[60px] w-full py-2 shadow-xl flex items-center flex-shrink-0 sticky top-0 z-20">
+    <nav className="bg-white h-[50px] w-full py-2 shadow-xl flex items-center flex-shrink-0 sticky top-0 z-20">
       <div className="w-4/5 flex justify-between mx-auto flex-shrink-0">
         <div className="flex items-center flex-shrink-0">
           <img
-            className="mt-2 scale-90 cursor-pointer hover:scale-[85%] transition-transform duration-300"
+            className="mt-2 scale-[75%] cursor-pointer hover:scale-[70%] transition-transform duration-300"
             src="/landtick-full-logo.svg"
             alt="Logo"
             onClick={() => navigate("/")}
@@ -55,7 +55,7 @@ export default function NavBar() {
                 className="flex gap-[12px] items-center hover:scale-90 cursor-pointer transition-transform duration-500"
                 onClick={handleDropdown}
               >
-                <h1 className="text-xl leading-normal bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] rounded-md text-transparent bg-clip-text font-bold cursor-pointer select-none capitalize">
+                <h1 className="text-xl leading-normal bg-gradient-to-r from-[#eb6eb1] to-[#e76c6c] rounded-md text-transparent bg-clip-text font-bold cursor-pointer select-none capitalize">
                   {username}
                 </h1>{" "}
                 <img src={Avatar} className=" cursor-pointer" />
@@ -125,14 +125,14 @@ export default function NavBar() {
           <>
             <div className="flex items-center box-border flex-shrink-0">
               <button
-                className="px-6 py-2 bg-gradient-to-r from-[#ec7ab7] to-[#ec7a7a] rounded-md hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] text-white font-semibold duration-300 mr-[30px]"
+                className="px-6 py-2 bg-gradient-to-r ring-1 ring-pink-100 from-[#ee71b4] to-[#ee7070] rounded-md hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] text-white text-sm font-semibold duration-300 mr-[30px]"
                 onClick={() => openModal(<Login />)}
               >
                 Masuk
               </button>
               <button
                 type="button"
-                className="px-6 py-2 ring-1 ring-pink-600 rounded-md text-pink-500 hover:border-0 hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] hover:text-white font-semibold mr-6"
+                className="px-6 py-2 ring-1 ring-pink-600 rounded-md text-pink-500 hover:border-0 hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] hover:text-white text-sm font-semibold mr-6"
                 onClick={() => openModal(<Register />)}
               >
                 Daftar

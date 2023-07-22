@@ -23,7 +23,7 @@ export default function FindTicket({ onSearch }) {
   };
 
   return (
-    <div className="flex w-[76.25rem] ml-[10%] -mt-[3vh] rounded-md shadow-xl mb-[80px]">
+    <div className="flex w-[76.25rem] mx-auto -mt-[3vh] rounded-md shadow-xl mb-[80px]">
       <div className="w-[17.75rem] h-[14.75rem] bg-[#f2f2f2] rounded-l-md ">
         <div className="flex items-center drop-shadow-md bg-white mt-3 py-1 border-l-[6px] border-orange-500">
           <img src={Train} alt="" />
