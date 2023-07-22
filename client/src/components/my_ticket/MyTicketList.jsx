@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/ModalContext";
 import MyTicketDetail from "../modal/MyTicketDetail";
+import PayFirst from "../modal/PayFirst";
 import FormatDate from "../FormatDateUtility";
 
 // Assets
@@ -20,8 +21,12 @@ export default function MyTicketList({ transaction }) {
 
   return (
     <div
-      className="mx-auto w-[64.68rem] h-[21.5rem] border-[1px]  border-[#b1b1b1] grid grid-cols-[50.18rem_1fr] rounded-lg overflow-hidden bg-white cursor-pointer scale-[95%] hover:scale-[96%] hover:ring-2 hover:ring-pink-400 hover:shadow-xl transitions duration-200"
-      onClick={transaction.status === "approved" ? () => openModal(<MyTicketDetail transaction={transaction} />) : null}
+      className="mx-auto w-[64.68rem] h-[21.5rem] border-[1px]  border-[#b1b1b1] grid grid-cols-[50.18rem_1fr] rounded-lg overflow-hidden bg-white cursor-pointer scale-[95%] hover:scale-[96%] hover:ring-2 hover:ring-pink-400 hover:shadow-xl transitions duration-200 select-none"
+      onClick={
+        transaction.status === "approved"
+          ? () => openModal(<MyTicketDetail transaction={transaction} />)
+          : () => openModal(<PayFirst />)
+      }
     >
       <div className="h-full">
         <div className=" h-[2.13rem]">
@@ -78,7 +83,7 @@ export default function MyTicketList({ transaction }) {
         <div className="flex justify-end">
           {transaction.status === "pending" ? (
             <button
-              className="h-[2.5rem] w-[12.875rem] bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] rounded-lg cursor-pointer text-white font-semibold mr-[.7rem] mt-[202px]"
+              className="h-[2.5rem] w-[12.875rem] bg-gradient-to-r from-[#EC7AB7] to-[#EC7A7A] hover:bg-gradient-to-r hover:from-[#e65ca6] hover:to-[#e05c5c] rounded-lg cursor-pointer text-white font-semibold mr-[.7rem] mt-[202px] select-none"
               onClick={(e) => {
                 e.stopPropagation();
                 navigate(`/payment-user/${transaction?.id}`);
