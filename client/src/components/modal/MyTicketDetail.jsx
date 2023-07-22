@@ -10,7 +10,7 @@ import Warning from "../../assets/images/warning.svg";
 
 export default function MyTicketDetail({ transaction }) {
   return (
-    <div className="flex items-center min-h-screen mx-auto">
+    <div className="flex items-center mx-auto scale-[90%]">
       <div className="relative mx-auto bg-white rounded-md scale-90">
         <div className="w-[816px] h-[748px] ">
           <div className="grid grid-cols-[514px_1fr] w-full h-[147px]">

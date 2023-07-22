@@ -20,7 +20,7 @@ export default function MyTicketList({ transaction }) {
 
   return (
     <div
-      className="mx-auto w-[64.68rem] h-[21.5rem] border-[1px]  border-[#b1b1b1] grid grid-cols-[50.18rem_1fr] rounded-lg overflow-hidden bg-white cursor-pointer scale-[98%] hover:scale-[99%] hover:ring-2 hover:ring-pink-400 hover:shadow-xl transitions duration-200"
+      className="mx-auto w-[64.68rem] h-[21.5rem] border-[1px]  border-[#b1b1b1] grid grid-cols-[50.18rem_1fr] rounded-lg overflow-hidden bg-white cursor-pointer scale-[95%] hover:scale-[96%] hover:ring-2 hover:ring-pink-400 hover:shadow-xl transitions duration-200"
       onClick={transaction.status === "approved" ? () => openModal(<MyTicketDetail transaction={transaction} />) : null}
     >
       <div className="h-full">

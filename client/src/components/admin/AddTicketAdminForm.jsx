@@ -44,7 +44,6 @@ export default function AddTicketAdminForm() {
     try {
       e.preventDefault();
       const response = await API.post("/ticket", form);
-      console.log("add ticket success : ", response);
 
       setMessage(alert("success"));
       setForm({
@@ -66,7 +65,7 @@ export default function AddTicketAdminForm() {
     }
   });
 
-  let { data: stations, isLoading } = useQuery("stationCache", async () => {
+  let { data: stations, isLoading } = useQuery("stationAddTicketFormCache", async () => {
     const response = await API.get("/stations");
     return response.data.data.Stations;
   });

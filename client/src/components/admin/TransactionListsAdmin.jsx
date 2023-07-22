@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useModal } from "../../context/ModalContext";
-import EditTicketAdmin from "./EditTicketAdmin";
 import { useMutation } from "react-query";
 import { API } from "../../config/api";
 
@@ -8,8 +7,8 @@ import TicketDetailAdmin from "./TicketDetailAdmin";
 
 // Assets
 import Search from "../../assets/images/search.svg";
-import Edit from "../../assets/images/edit.svg";
 import Delete from "../../assets/images/delete.svg";
+import Arrow from "../../assets/images/arrow.svg";
 
 export default function TransactionListsAdmin({ transaction, index, refetch }) {
   const { openModal } = useModal();
@@ -34,7 +33,7 @@ export default function TransactionListsAdmin({ transaction, index, refetch }) {
   return (
     <div
       className={`grid grid-cols-6  w-full min-h-[74px] max-h-[74px] pl-[15px] ${
-        no % 2 !== 0 ? "border-y-2 border-slate-300 bg-[#f9f9f9]" : null
+        no % 2 !== 0 ? "border-y-2 border-slate-50 bg-slate-50" : null
       }`}
     >
       <div className="flex items-center ml-1">
@@ -45,7 +44,8 @@ export default function TransactionListsAdmin({ transaction, index, refetch }) {
       </div>
       <div className="flex items-center">
         <p>
-          {transaction.ticket.start_station.name}-{transaction.ticket.destination_station.name}
+          {transaction.ticket.start_station.name} <img src={Arrow} className="inline scale-[70%] mb-[.15rem]" />{" "}
+          {transaction.ticket.destination_station.name}
         </p>
       </div>
       <div className="flex items-center font-medium text-orange-400 justify-center">
@@ -58,14 +58,6 @@ export default function TransactionListsAdmin({ transaction, index, refetch }) {
               openModal(<TicketDetailAdmin id={transaction.id} />);
             }}
             src={Search}
-            alt="search"
-            className="cursor-pointer hover:scale-110"
-          />
-          <img
-            onClick={() => {
-              openModal(<EditTicketAdmin />);
-            }}
-            src={Edit}
             alt="search"
             className="cursor-pointer hover:scale-110"
           />

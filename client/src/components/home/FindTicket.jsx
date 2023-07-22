@@ -55,8 +55,8 @@ export default function FindTicket({ onSearch }) {
             <div className="flex w-[25rem] justify-between mb-1">
               <p className="font-bold">Tanggal Berangkat</p>
               <div>
-                <input type="checkbox" />
-                <p className="font-bold inline ml-1">Pulang Pergi</p>
+                <input type="checkbox" disabled />
+                <p className="font-bold inline ml-1 select-none">Pulang Pergi</p>
               </div>
             </div>
             <input
@@ -92,7 +92,7 @@ export default function FindTicket({ onSearch }) {
               <div className="flex w-[25rem] justify-between mb-1">
                 <div className="w-[7.25rem] ">
                   <label className="block font-bold mb-1">Dewasa</label>
-                  <select className="w-full border-[3px] rounded-md py-1 border-slate-300 text-slate-400 disabled">
+                  <select className="w-full border-[3px] rounded-md py-1 border-slate-300 text-slate-400" disabled>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -100,7 +100,10 @@ export default function FindTicket({ onSearch }) {
                 </div>
                 <div className="w-[7.25rem] ">
                   <label className="block font-bold mb-1">Bayi</label>
-                  <select className="w-full border-[3px] rounded-md py-1 border-slate-300 text-slate-400 disabled">
+                  <select
+                    className="w-full border-[3px] rounded-md py-1 border-slate-300 text-slate-400 disabled"
+                    disabled
+                  >
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>

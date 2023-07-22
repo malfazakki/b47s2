@@ -31,12 +31,11 @@ export default function TicketListDetail({ ticket }) {
 
   const mutationFunction = async () => {
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await API.post("/transaction", transaction);
-      console.log("success make transaction", response);
       handleSelectTicket();
     } catch (error) {
       console.log("error catch: ", error);
-      console.log("error catch: ", transaction);
     }
   };
 

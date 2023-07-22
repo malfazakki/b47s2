@@ -10,15 +10,15 @@ export default function TransactionLists() {
     data: transactions,
     isLoading,
     refetch,
-  } = useQuery("transactionsCache", async () => {
+  } = useQuery("transactionsListCache", async () => {
     const response = await API.get("/transactions");
     return response.data.data;
   });
 
   return (
-    <div className="mt-[60px] mx-auto mb-20 min-h-[68vh]">
+    <div className="mt-[60px] mx-auto mb-20 min-h-[69.7vh]">
       <h1 className="text-4xl font-semibold w-[1266px] mx-auto mb-[34px]">List Transaksi</h1>
-      <div className="w-[1266px] grid mx-auto mt-20">
+      <div className="w-[1266px] grid mx-auto mt-20 border-2 pt-8 pl-3 pr-3">
         <div className="grid grid-cols-6 w-full pl-[15px] font-bold mb-10">
           <div className="flex items-center">
             <p>No</p>
@@ -37,7 +37,7 @@ export default function TransactionLists() {
           </div>
         </div>
         {isLoading ? (
-          <p>Loading...</p>
+          <p className="text-center">Loading...</p>
         ) : transactions && transactions.length > 0 ? (
           transactions.map((transaction, index) => (
             <TransactionListsAdmin transaction={transaction} key={transaction.id} index={index} refetch={refetch} />

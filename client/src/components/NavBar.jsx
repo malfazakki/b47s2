@@ -60,6 +60,7 @@ export default function NavBar() {
                 </h1>{" "}
                 <img src={Avatar} className=" cursor-pointer" />
               </div>
+              {/* ADMIN ROLE */}
               {role === "admin" ? (
                 <div
                   id="dropdown"
@@ -74,6 +75,12 @@ export default function NavBar() {
                         <span className="text-pink-400 text-lg font-semibold">Add Ticket</span>
                       </Link>
                     </li>
+                    <li>
+                      <Link to="/admin" className="flex items-center gap-3 py-2 hover:bg-gray-100 px-6 mb-2">
+                        <img src={Payment} alt="" className=" scale-90" />{" "}
+                        <span className="text-pink-400 text-lg font-semibold">Transactions</span>
+                      </Link>
+                    </li>
                     <li className="border-t-4 border-pink-300" onClick={logout}>
                       <Link className="flex items-center gap-3 py-2 hover:bg-gray-100 px-6">
                         <img src={Logo} className="scale-75" alt="" />{" "}
@@ -83,6 +90,7 @@ export default function NavBar() {
                   </ul>
                 </div>
               ) : (
+                // USER ROLE
                 <div
                   id="dropdown"
                   className={` ${

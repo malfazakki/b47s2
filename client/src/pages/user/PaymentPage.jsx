@@ -22,12 +22,13 @@ export default function PaymentPage() {
   return (
     <>
       <NavBar />
-
-      <div className="flex flex-col justify-center items-center gap-20 mb-20 mt-20">
-        <h1 className="text-4xl w-[64.68rem] -ml-[98px]">Pending Ticket</h1>
-        {pendingTransactions?.map((transaction, index) => (
-          <MyTicketList transaction={transaction} key={index} />
-        ))}
+      <div className="flex flex-col justify-center items-center gap-10 mb-20 mt-20">
+        <h1 className="text-4xl w-[64.68rem] -ml-[98px] mb-5">Pending Ticket</h1>
+        {pendingTransactions && pendingTransactions.length > 0 ? (
+          pendingTransactions.map((transaction, index) => <MyTicketList transaction={transaction} key={index} />)
+        ) : (
+          <p>No Pending Ticket Found...</p>
+        )}
         <Modal />
       </div>
     </>

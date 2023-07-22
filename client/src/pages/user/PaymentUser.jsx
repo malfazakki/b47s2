@@ -58,17 +58,14 @@ export default function PaymentUser() {
       const body = JSON.stringify(data);
 
       const response = await API.post("/transaction/midtrans", body, config);
-      console.log("transaction success :", response);
 
       // code here
       const token = response.data.data.token;
       window.snap.pay(token, {
         onSuccess: function (result) {
-          console.log(result);
           navigate("/myticket");
         },
         onPending: function (result) {
-          console.log(result);
           navigate("/myticket");
         },
         onError: function (result) {

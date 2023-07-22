@@ -35,8 +35,6 @@ export default function Register() {
 
       const response = await API.post("/register", form);
 
-      console.log("register success : ", response);
-
       setMessage(alert("success"));
       setForm({
         full_name: "",
