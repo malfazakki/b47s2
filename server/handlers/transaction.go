@@ -181,7 +181,7 @@ func (h *handlerTransaction) Notification(c echo.Context) error {
 		h.TransactionRepository.UpdateTransaction("pending", order_id)
 	}
 
-	return c.JSON(http.StatusOK, dto.SuccessResult{Message: "success", Data: notificationPayload})
+	return c.JSON(http.StatusOK, dto.SuccessMidtransResult{Code: http.StatusOK, Data: notificationPayload})
 }
 
 func (h *handlerTransaction) DeleteTransaction(c echo.Context) error {
