@@ -6,7 +6,7 @@ export const ticketListData = [
     start_date: "30-10-2022",
     start_station: {
       id: 1,
-      name: "Gambir",
+      name: "Gambir Jauh",
     },
     start_time: "10:00",
     destination_station: {
