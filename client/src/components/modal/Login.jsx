@@ -7,6 +7,7 @@ import { UserContext } from "../../context/UserContext";
 import { API, setAuthToken } from "../../config/api";
 import Register from "./Register";
 import Alert from "./Alert";
+import Modal from "./Modal";
 
 export default function Login() {
   let navigate = useNavigate();
@@ -35,7 +36,8 @@ export default function Login() {
 
       const response = await API.post("/login", form);
 
-      console.log("login success : ", response);
+      // console.log("login success : ", response);
+      // alert("success login");
 
       dispatch({
         type: "LOGIN_SUCCESS",
@@ -43,21 +45,22 @@ export default function Login() {
       });
 
       setAuthToken(localStorage.token);
+      alert("login success");
+      // openModal(<Alert />);
 
       if (response.data.data.role === "admin") {
         navigate("/admin");
       } else {
         navigate("/");
       }
-
-      setMessage(() => openModal(<Alert>Success</Alert>));
     } catch (error) {
       const alert = (
         <Alert variant="danger" className="py-1">
           Login failed
         </Alert>
       );
-      setMessage(alert);
+      // setMessage(alert);
+      alert("login failed");
       console.log("login failed : ", error);
     }
 
@@ -101,6 +104,7 @@ export default function Login() {
           </b>
         </p>
       </div>
+      {/* <Modal /> */}
     </div>
   );
 }

@@ -33,6 +33,7 @@ export default function NavBar() {
       type: "LOGOUT",
     });
     setDropdown(false);
+    alert("sure want to log out?");
     navigate("/");
   };
 
